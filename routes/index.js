@@ -1,5 +1,5 @@
 import express from 'express';
-import students from './api/student';
+import students from './student.route';
 
 const router = express.Router();
 
