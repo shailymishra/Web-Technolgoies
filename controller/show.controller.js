@@ -1,7 +1,8 @@
 const db = require('../config/db.sequelize.config');
-const show = db.show;
+const show = db.mySqldb.show
 
 class ShowController {
+
     findAll(req, res) {
         return show.findAll().then(shows => {
             res.status(200).send({
@@ -12,7 +13,7 @@ class ShowController {
         });
     }
     findById(req, res) {
-        return show.findById(req.params.id).then(show => {
+        return show.findByPk(req.params.id).then(show => {
             res.status(200).send({
                 success_code: 'show_retrieved_success',
                 success_description: 'Show retrieved successfully',
@@ -32,14 +33,14 @@ class ShowController {
     update(req, res) {
         const id = req.params.id;
         return show.update(new Show(req.body), { where: { id: id } }).then(() => {
-           return show.findById(id).then(findshow => {
+            return show.findById(id).then(findshow => {
                 res.status(201).send({
                     success_code: 'show_updated_success',
                     success_description: 'Show updated successfully',
                     details: findshow,
                 });
             })
-           
+
         });
     }
     delete(req, res) {

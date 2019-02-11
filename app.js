@@ -4,7 +4,7 @@ require('dotenv').config();
 import express from 'express';
 import bodyParser from 'body-parser';
 import router from './routes';
-import dbConfig from './config/db.sequelize.config';
+import db from './config/db.sequelize.config';
 
 const app = express();
 app.use(bodyParser.json());
@@ -16,9 +16,28 @@ app.listen(port, () => {
     console.log(`Server running on ${port}`);
 });
 
-dbConfig.sequelize.sync().then(() => {
-    console.log('DB connected')
+db.mySqldb.sequelize.sync().then(() => {
+    console.log('Mysql DB connected')
 });
+
+
+db.postgresdb.sequelize.sync().then(() => {
+    console.log('Postgres DB connected')
+})
+
+
+// router.get('/test', (req, res) => {
+//     db.postgresdb.sequelize.query(`SELECT *  FROM   "BackendRest"."Games"`)
+//         .spread(rows => {
+//             res.status(200).send({
+//                 success_code: 'games_retrieved_success',
+//                 success_description: 'Games retrieved successfully',
+//                 details: rows,
+//             });
+//         })
+// });
+
+
 
 // db.sequelize.sync({ force: true }).then(() => {
 
@@ -26,3 +45,4 @@ dbConfig.sequelize.sync().then(() => {
 app.get('/', (req, res, next) => {
     res.send('Hello, world!');
 });
+
