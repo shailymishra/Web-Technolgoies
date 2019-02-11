@@ -6,6 +6,7 @@ import song from './song.route';
 import book from './book.route';
 import game from './game.route';
 import color from './color.route';
+import country from './country.route'
 
 const router = express.Router();
 
@@ -16,6 +17,6 @@ router.use('/song', song);
 router.use('/book', book);
 router.use('/game', game);
 router.use('/color', color);
-
+router.use('/country', country);
 
 export default router;
