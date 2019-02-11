@@ -1,76 +1,70 @@
 
 const db = require('../config/db.sequelize.config');
-const mysqldb = db.mysqldb;
-
-class EmployeeController {
+const postgresdb = db.postgresdb;
+class GameController {
     findAll(req, res) {
-        mysqldb.sequelize.query("SELECT * FROM `Employee`", { type: mysqldb.sequelize.QueryTypes.SELECT })
+        postgresdb.sequelize.query(`SELECT * FROM "BackendRest"."Games"`, { type: postgresdb.sequelize.QueryTypes.SELECT })
             .then(rows => {
                 res.status(200).send({
-                    success_code: 'employee_retrieved_success',
-                    success_description: 'Employee retrieved successfully',
+                    success_code: 'games_retrieved_success',
+                    success_description: 'Games retrieved successfully',
                     details: rows,
                 });
             })
     }
     findById(req, res) {
         const id = req.params.id;
-        mysqldb.sequelize.query(`SELECT * FROM Employee where id= ${id}`, { type: mysqldb.sequelize.QueryTypes.SELECT })
+        postgresdb.sequelize.query(`SELECT * FROM "BackendRest"."Games" where id= ${id}`, { type: postgresdb.sequelize.QueryTypes.SELECT })
             .then(row => {
                 res.status(200).send({
-                    success_code: 'employee_retrieved_success',
-                    success_description: 'Employee retrieved successfully',
+                    success_code: 'games_retrieved_success',
+                    success_description: 'Games retrieved successfully',
                     details: row,
                 });
             })
     }
     create(req, res) {
-        const employee = req.body;
-        const insertQuery = `INSERT INTO Employee 
-        ( name, department, designation)
-         VALUES ( "${employee.name}" , "${employee.department}" , "${employee.designation}");`
-
-        mysqldb.sequelize.query(insertQuery, { type: mysqldb.sequelize.QueryTypes.INSERT })
+        const game = req.body;
+        const insertQuery = `INSERT INTO "BackendRest"."Games" (name,type) VALUES ('${game.name}', '${game.type}')`;
+        postgresdb.sequelize.query(insertQuery, { type: postgresdb.sequelize.QueryTypes.INSERT })
             .spread((insertRowId) => {
                 res.status(200).send({
-                    success_code: 'employee_added_success',
-                    success_description: 'Employee added successfully',
+                    success_code: 'game_added_success',
+                    success_description: 'Game added successfully',
                     details: insertRowId,
                 });
             })
     }
     update(req, res) {
         const id = req.params.id;
-        const employee = req.body;
+        const game = req.body;
 
-        const updateQuery = `UPDATE Employee SET 
-        name = "${employee.name}",
-        department = "${employee.department}",
-        designation = "${employee.designation}"
+        const updateQuery = `UPDATE "BackendRest"."Games"  SET 
+        name = '${game.name}',
+        type = '${game.type}'
         WHERE id = ${id}`;
 
-        mysqldb.sequelize.query(updateQuery, { type: mysqldb.sequelize.QueryTypes.UPDATE })
+        postgresdb.sequelize.query(updateQuery, { type: postgresdb.sequelize.QueryTypes.UPDATE })
             .spread(() => {
                 res.status(200).send({
-                    success_code: 'employee_updated_success',
-                    success_description: 'Employee updated successfully',
+                    success_code: 'game_updated_success',
+                    success_description: 'Game updated successfully',
                 });
             })
     }
     delete(req, res) {
         const id = req.params.id;
-        const deleteQuery = `DELETE FROM Employee where id = "${id}"`;
-        mysqldb.sequelize.query(deleteQuery)
+        const deleteQuery = `DELETE FROM "BackendRest"."Games" where id = ${id}`;
+        postgresdb.sequelize.query(deleteQuery)
             .spread(() => {
                 res.status(200).send({
-                    success_code: 'employee_delete_success',
-                    success_description: 'Employee deleted successfully',
+                    success_code: 'game_delete_success',
+                    success_description: 'Game deleted successfully',
                 });
             })
     }
-
 }
 
-const employeeController = new EmployeeController();
-export default employeeController;
+const gameController = new GameController();
+export default gameController;
 

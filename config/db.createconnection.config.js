@@ -10,5 +10,4 @@ export const databaseCredentials = {
 
 const connection = mysql.createConnection(databaseCredentials);
 
-console.log('connection db')
 export default connection;
