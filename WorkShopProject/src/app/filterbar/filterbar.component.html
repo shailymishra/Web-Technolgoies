@@ -1,0 +1,44 @@
+<div class="row">
+  <form [formGroup]="radioTest" (ngSubmit)="generate()">
+    <div class=" col-md-3 btn-group" dropdown>
+      <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle">
+        {{this.radioTest.value.countryId}}
+        <span class="caret"></span>
+      </button>
+
+      <ul *dropdownMenu class="dropdown-menu" role="menu">
+        <!-- <li role="menuitem"><input type="radio" name="country" value='Male' formControlName="country">Male</li> -->
+        <li *ngFor="let country of countries" role="menuitem">
+          <input type="radio" name="countryId" [value]="country.id" formControlName="countryId">{{country.name}}</li>
+      </ul>
+
+    </div>
+    <div class=" col-md-3 btn-group" dropdown>
+      <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle">
+        {{this.radioTest.value.stateId}}
+        <span class="caret"></span>
+      </button>
+
+      <ul *dropdownMenu class="dropdown-menu" role="menu">
+        <!-- <li role="menuitem"><input type="radio" name="country" value='Male' formControlName="country">Male</li> -->
+        <li *ngFor="let state of states" role="menuitem">
+          <input type="radio" name="stateId" [value]="state.id" formControlName="stateId">{{state.name}}</li>
+      </ul>
+
+    </div>
+    <div class=" col-md-3 btn-group" dropdown>
+      <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle">
+        {{this.radioTest.value.cityId}}
+        <span class="caret"></span>
+      </button>
+
+      <ul *dropdownMenu class="dropdown-menu" role="menu">
+        <!-- <li role="menuitem"><input type="radio" name="country" value='Male' formControlName="country">Male</li> -->
+        <li *ngFor="let city of cities" role="menuitem">
+          <input type="radio" name="cityId" [value]="city.id" formControlName="cityId">{{city.name}}</li>
+      </ul>
+    </div>
+
+    <button type="submit">Generate</button>
+  </form>
+</div>

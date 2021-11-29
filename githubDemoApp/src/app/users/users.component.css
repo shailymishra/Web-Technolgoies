@@ -1,0 +1,28 @@
+.user-avatar{
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    line-height: 100px;
+    overflow: hidden;
+    text-align: center;
+}
+.user-profile {
+    display: block;
+}
+.follower-card{
+    display: block;
+    margin-bottom: 20px;
+}
+.follower-thumbnail{
+    display: block;
+}
+.profile{
+    background-color: rgba(0,0,0,.03) !important;
+}
+.follower-name{
+    font-size: 16px;
+}
+.follower-img{
+    width: 150px;
+    margin-bottom: 10px;
+}

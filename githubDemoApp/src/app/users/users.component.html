@@ -1,0 +1,82 @@
+<app-spinner [isRunning]="isRequesting"></app-spinner>
+<div class="search-header">
+    <div class="container">
+        <div class="col-md-3">
+            <form (ngSubmit)="searchUser()">
+                <div class="form-group">
+                    <input type="search" class="form-control" placeholder="Search User" [(ngModel)]="username" name="username">
+                    <button type="submit" class="search-btn"></button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="container target" *ngIf="user">
+    <div class="row">
+        <div class="col-sm-4">
+            <a href="javascript:;" class="text-center user-profile">
+                <img title="profile-image" 
+                     class="rounded-circle img-fluid follower-img" src="{{user.avatar_url}}">
+            </a>
+        </div>
+        <div class="col-sm-8">
+            <h1 class="user-name float-left">{{user.name}}</h1>
+        </div>
+
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-sm-4">
+            <!--left col-->
+            <ul class="list-group">
+                <li class="list-group-item profile">Profile</li>
+                <li class="list-group-item text-right">
+                    <span class="float-left"><strong class="">Location</strong></span>{{user.location}}
+                </li>
+                <li class="list-group-item text-right">
+                    <span class="float-left"><strong class="">Email</strong></span> {{user.email}}
+                </li>
+                <li class="list-group-item text-right">
+                    <span class="float-left"><strong class="">Member Since </strong></span> {{user.created_at | date : ('dd-MM-yyyy')}}
+                </li>
+            </ul>
+        </div>
+        <!--/col-3-->
+        <div class="col-sm-8">
+            <div class="card">
+                <div class="card-header" contenteditable="false">Followers</div>
+                <div class="card-body">
+                    <div class="row">
+                        <ng-container *ngIf="followers != undefined && followers.length > 0">
+                            <div class="col-md-4" *ngFor="let follower of followers |  paginate: { id: 'gitFollowers',  itemsPerPage: 9, currentPage: p, totalItems: totalFollowers } ">
+                                <div class="follower-card text-center">
+                                    <div class="follower-thumbnail">
+                                        <img class="img-fluid rounded-circle follower-img" alt="300x200" src="{{follower.avatar_url}}" />
+                                    </div>
+                                    <div class="caption">
+                                        <h3 class="follower-name">{{follower.login}}</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-container>
+                        <ng-container *ngIf="followers != undefined && followers.length == 0">
+                            <div class="col-md-4">
+                                <h3 class="follower-name">Followers not available</h3>
+                            </div>
+                        </ng-container>
+                    </div>
+                </div>
+            </div>
+            <pagination-controls id= 'gitFollowers' (pageChange)="pageChanged($event)">
+            </pagination-controls>
+        </div>
+    </div>
+</div>
+<div class="container target" *ngIf="!user && isSearch">
+    <div class="card">
+        <div class="card-header" contenteditable="false">User</div>
+        <div class="card-body">
+            <h3 class="follower-name">No User Found</h3>
+        </div>
+    </div>
+</div>

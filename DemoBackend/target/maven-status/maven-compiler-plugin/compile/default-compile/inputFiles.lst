@@ -1,0 +1,10 @@
+/home/shaily/NetBeansProjects/DemoBackend/src/main/java/com/shaily/demobackend/department/repository/IDepartmentRepository.java
+/home/shaily/NetBeansProjects/DemoBackend/src/main/java/com/shaily/demobackend/department/managers/impl/DepartmentManager.java
+/home/shaily/NetBeansProjects/DemoBackend/src/main/java/com/shaily/demobackend/department/models/Department.java
+/home/shaily/NetBeansProjects/DemoBackend/src/main/java/com/shaily/demobackend/department/dao/IDepartmentDAO.java
+/home/shaily/NetBeansProjects/DemoBackend/src/main/java/com/shaily/demobackend/department/controllers/IDepartmentController.java
+/home/shaily/NetBeansProjects/DemoBackend/src/main/java/com/shaily/demobackend/department/managers/IDepartmentManager.java
+/home/shaily/NetBeansProjects/DemoBackend/src/main/java/com/shaily/demobackend/config/BeanConfiguration.java
+/home/shaily/NetBeansProjects/DemoBackend/src/main/java/com/shaily/demobackend/Application.java
+/home/shaily/NetBeansProjects/DemoBackend/src/main/java/com/shaily/demobackend/department/dao/impl/DepartmentDAO.java
+/home/shaily/NetBeansProjects/DemoBackend/src/main/java/com/shaily/demobackend/department/controllers/impl/DepartmentControllerImpl.java
